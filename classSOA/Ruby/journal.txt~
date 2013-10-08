@@ -1,0 +1,249 @@
+Week 3
+
+課堂
+SOA課本第二章談論ruby 
+Ruby使用
+http://zh.wikipedia.org/wiki/Ruby#.E8.AE.8A.E6.95.B8.E8.88.87.E5.87.BD.E6.95.B8.E7.9A.84.E5.91.BD.E5.90.8D.E8.A6.8F.E5.89.87
+下面的代碼可以在Ruby shell中執行，比如irb互動式命令列，或者保存為檔案並執行命令ruby <filename>。
+
+更簡潔的使用
+a = [1,'hi', 3.14, 1, 2, [4, 5]]
+
+p a.reverse      # [[4, 5], 2, 1, 3.14, 'hi', 1]
+
+
+EX打:
+ (1..10).all? {|num| num > 0}
+ => true
+
+ 不用寫一個for迴圈 只要在ruby裡面打 他就會幫我們找到
+
+ ^c 清除
+
+ (1..10).reduce(:+)
+=>55
+
+p.4
+4. Ruby attr_accessor
+若要讀寫便需要稱為屬性存取器 (attribute accessors) 的公開方法（編註：所有實例變數都不公開的，除非透過公開方法存取)
+http://guides.ruby.tw/ruby/accessors.html
+
+5. Reflection 
+
+P.5 
+Stackoverflow 可以問問題、找問題的網站http://stackoverflow.com/
+
+Share code 
+http://pastebin.com/
+
+
+HW tryruby中學習
+
+to_s converts things to strings.
+to_i converts things to integers (numbers.)
+to_a converts things to arrays.
+poem['toast'] = 'honeydew' //把詩裡面的toast改成honeydew
+poem.lines¬.to_a.reve¬rse   // 把詩以每一行為單位 相反列印
+ You turned the poem into a list using lines.to_a. lines decides the way the string is split up, then to_a converted it into an Array.
+
+
+ join  The join method took that list of reversed lines and put them together into a string. (Sure, you could have also just used to_s.)
+
+:splendid → a masterpiece.
+:quite_good → enjoyed, sure, yes.
+:mediocre → equal parts great and terrible.
+:quite_not_good → notably bad.
+:abysmal → steaming wreck.
+ratings = Hash.new(0)
+
+ books.valu¬es.each{ |rate¬| ratin¬gs[rate] += 1}
+ => [:splendid]  //結果
+
+type ratings to see the count.
+ratings
+ => {:splendid=>1}
+
+>  > > 5.times {prin¬t"Odelay!"¬}
+>  > > => "Odelay!Odelay!Odelay!Odelay!Odelay!"
+>  > >
+>  > > Hashes. The little dictionary with the curly pages: {}.
+>  > > Symbols. Tiny, efficient code words with a colon::splendid.
+>  > > Blocks. Chunks of code which can be tacked on to many of Ruby's methods. Here's the code you used to build a scorecard:
+>  > > books.values.each { |rate| ratings[rate] += 1 }.
+>  > > Dir.entries "/": Anything listed after a method is considered an attachment.
+>  > > print poem: See, print is an ordinary method. And the poem is attached. To be printed.
+>  > > print "pre", "event", "ual", "ism" has several arguments, with commas between them.
+>  > > The Dir[] method is like entries but you search for files with wildcard characters.
+>  > >
+>  > >
+>  > > Let's crack open this comics file, then. Here's the way:print File.read("/comics.txt")
+>  > >
+>  > > > print File.¬read("/com¬ics.txt")
+>  > > > => "Achewood: http://achewood.com/
+>  > > > Dinosaur Comics: http://qwantz.com/
+>  > > > Perry Bible Fellowship: http://cheston.com/pbf/archive.html
+>  > > > Get Your War On: http://mnftiu.cc/
+>  > > > "
+>  > > > http://www.wretch.cc/blog/yschu7/11817352 ruby指令
+>  > > > Remember you have already loaded your comics:comics = load_comics( '/comics.txt' )
+>  > > > Now, let's make a list of the links to each comic:
+>  > > > Popup.make do
+>  > > >   h1 "Comics on the Web"
+>  > > >     list do
+>  > > >         comics.each do |name, url|
+>  > > >               link name, url
+>  > > >                   end
+>  > > >                     end
+>  > > >                     end
+>  > > >                     You can click on the links and read the comics in the little window even! Smashing!
+>  > > >
+>  > > >                      To start an entry: entry = BlogEntry.new.
+>  > > >
+>  > > >                      Outside the class, we use accessors:entry.time = Time.now
+>  > > >                      But inside we use instance variables:@time = Time.now They're the exact same thing, but expressed in two different places of your program.
+>  > > >
+>  > > >                      When a new BlogEntry is created, the initializemethod is used to check for any arguments to new
+>  > > >
+>  > > >                      總結
+>  > > >                      Classes. Everything in Ruby is some kind of object. Classes explain objects. How a certain object works. For example, you made a few blog entry objects and these objects are explained in the BlogEntry class. In other words: you call them BlogEntry objects.
+>  > > >                      Accessors are variables attached to an object which can be used outside the object. (entry.time = Time.now)
+>  > > >                      Instance variables are the same variables you're using for accessors when inside the object. Like in a method definition. (@time = Time.now)
+>  > > >
+>  > > >                      建立 ruby 的練習目錄(之前 git 的目錄在 /root 目錄下, 請依照自己的環境設定為準)
+>  > > >
+>  > > >
+>  > > >                      # cd   /root
+>  > > >                      # mkdir   ruby
+>  > > >
+>  > > >
+>  > > >                      建立練習的檔案(也可以直接 vi 來輸入內容, 這邊先來建立空的檔案練習 git)
+>  > > >
+>  > > >
+>  > > >                      # touch  ruby/ri20min.rb
+>  > > >
+>  > > >
+>  > > >                      將檔案加入到 git 內.
+>  > > >                      這個部分是用偷懶的方式 使用 目錄名稱/* 的方式來加入, 也可以指定檔案名稱 ruby/ri20min.rb 來加入
+                                                                     >  > > >                      git 原則上加入檔案就會把目錄路徑加進來, 所以如果建立一個空的目錄, 使用 git add 空目錄是沒有任何效果的.  但是在網路上也有找到下列這樣的方法.
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                      # git  add  ruby/*
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                      執行送交(commit)的動作, 並加入說明
+                                                                     >  > > >                      # git  commit  -m  "Add ruby 20min exercise file"
+                                                                     >  > > >                      [master 4c9b3d8] Add ruby 20min exercise file
+                                                                     >  > > >                      0 files changed
+                                                                     >  > > >                      create mode 100644 ruby/ri20min.rb
+                                            
+                                                                     >  > > >
+                                                                     >  > > >                      將檔案送到 GitHub 上面
+                                                                     >  > > >                      # git  push  origin  master
+                                                                     >  > > >                      Username for 'https://github.com': 請輸入你的帳號
+                                                                     >  > > >                      Password for 'https://sakanamax@github.com': 請輸入你的密碼
+                                                                     >  > > >                      Counting objects: 4, done.
+                                                                     >  > > >                      Compressing objects: 100% (2/2), done.
+                                                                     >  > > >                      Writing objects: 100% (3/3), 327 bytes, done.
+                                                                     >  > > >                      Total 3 (delta 0), reused 0 (delta 0)
+                                                                     >  > > >                      To https://github.com/sakanamax/2013ironman.git
+                                                                     >  > > >                        ecf4424..4c9b3d8  master -> master
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                        可以再次觀察 GitHub 上面的repo情形.
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                        接下來可以去編輯剛剛的 ri20min.rb
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                        # git  add  ruby/ri20min.rb
+                                                                     >  > > >                        # git  commit  -m   "vi ri20min.rb"
+                                                                     >  > > >                        [master aeb3c4c] vi ri20min.rb
+                                                                     >  > > >                        1 file changed, 6 insertions(+)
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                        # git  push  origin  master
+                                                                     >  > > >                        Username for 'https://github.com': 請輸入你的帳號
+                                                                     >  > > >                        Password for 'https://sakanamax@github.com': 請輸入你的密碼
+                                                                     >  > > >                        Counting objects: 7, done.
+                                                                     >  > > >                        Compressing objects: 100% (3/3), done.
+                                                                     >  > > >                        Writing objects: 100% (4/4), 418 bytes, done.
+                                                                     >  > > >                        Total 4 (delta 0), reused 0 (delta 0)
+                                                                     >  > > >                        To https://github.com/sakanamax/2013ironman.git
+                                                                     >  > > >                          4c9b3d8..aeb3c4c  master -> master
+                                                                     >  > > >
+                                                                     >  > > >
+                                                                     >  > > >                          就可以將剛剛編輯的程式碼送交到 GitHub 上面. 以後的練習就以此類推
+                                                                     >  > > >                          git  add  檔案
+                                                                     >  > > >                          git  commit  -m  “敘述”
+                                                                     >  > > >                          git  push  origin  master
+                                                                     >  > > >
+                                                                     >  > > >                          vi 簡易說明
+                                                                     >  > > >                          要管理好 Linux 系統﹐少不了要對設定檔案進行編輯，如果您用慣了 Microsoft Word 或 Corel Wordperfect 的話，除了 Xwindows 裡面的編輯程式(如 xemacs )用起來尚可應付外，於 Linux 的文字模式下，會覺得檔案編輯程式都沒有 Windows 程式那麼方便。雖然 Linux 下面也有好多種文書編輯器，例如﹕ed、vi、pico、joe、emacs等。
+                                                                     >  > > >                          以下我們以最常見到的 vi 這套文書軟體來介紹 Linux 底下的文書編輯動作。
+                                                                     >  > > >                          基本上 vi 共分為兩種模式，一種是『編輯模式』，一種被稱為『命令模式』，其中，在命令模式中尚包含『命令列模式』的情況。『編輯』與『命令』這兩種模式的切換動作是以 『Esc』來達成的。通常，檔案一開啟或者新建檔時，會成為命令模式，如果要在檔案中輸入字元，就必需以小寫的 i 來進入編輯模式，進入編輯模式後你輸入的咚咚才會顯示出來！那由『編輯模式』要變成『命令模式』時，就直接按『Esc』即可。而若要進入『命令列模式』時，就必須要在命令模式中輸入『:』（冒號），那游標就會跑到螢幕的最下面一行來等待你輸入啦！
+                                                                     >  > > >                          簡易執行範例
+                                                                     >  > > >                          新建檔案： 
+                                                                     >  > > >                          好了，我們在 Linux 底下建立一個名為 test.dat 的檔案，可以這樣開啟一個新檔案：
+                                                                     >  > > >                          [root@tsai  root]#  vi  test.dat
+                                                                     >  > > >                          進入編輯模式： 
+                                                                     >  > > >                          一進入 vi 的畫面你會看到一片空白（烏漆嘛黑的），而且即會進入命令模式，你可以輸入 i 來進入編輯模式，這時候你會看到螢幕的最下方會出現『--INSERT--』字樣：
+                                                                     >  > > >                          開始編輯： 
+                                                                     >  > > >                          這時候你就可以隨便按幾個字來輸入一下，在這裡要提醒一下，『Tab』鍵與空白鍵是不一樣的咚咚喔！
+                                                                     >  > > >                          回到命令模式： 
+                                                                     >  > > >                          在編輯模式的時候，不論你按什麼鍵（除了 Esc 之外）都會被視為字元而顯示在螢幕上，這時按下 Esc 鍵後會回到命令模式，如果你會到了命令模式，但是要消除你目前游標所在行的內容，你可以輸入『dd』，就可以殺掉一整列了！
+                                                                     >  > > >                          在命令列模式輸入儲存指令： 
+                                                                     >  > > >                          OK，我們要存檔了，存檔並離開的指令很簡單，輸入『:wq』即可存檔離開！這時你在提示字元後面輸入『 ls -l 』即可看到我們剛剛建立的 test.dat 檔案啦！
+                                                                     >  > > >                          命令列內容說明
+                                                                     >  > > >                          如前所述，所謂的命令列或命令模式，就是在最下面一行沒有顯示『--INSERT--』或者『--REPLACE--』字樣的時候。通常在命令列中的指令有下面幾種：（注意，當按下 『:』 時，游標會自動移動到螢幕的最下面一行！） 
+                                                                     >  > > >                           
+                                                                     >  > > >
+                                                                     >  > > >                           進入編輯模式：  
+>  > > >                           I  插入：在目前的游標所在處插入輸入之文字，已存在的文字會向後退；
+>  > > >                           A  增加：由目前游標所在的下一個字開始輸入，已存在的文字會向後退：
+>  > > >                           O  插入新的一行：從游標所在的下一行枝行首開始輸入文字；
+>  > > >                           R  取代：會取代游標所在的那一個字元；
+>  > > >                           R  全部取代：會一直取代游標所在的文字，直到按下 ESC 為止；
+>  > > >                            
+>  > > >                              
+>  > > >                              命令模式：  
+>  > > >                              :wq 將所做修改儲存後離開 vi；
+>  > > >                              :w  僅儲存檔案；
+>  > > >                              :w  [filename]  將目前的內容儲存到 『filename』 這個檔案中（類似另存新檔）；
+>  > > >                              :r  [filename]  將 『filename』 這個檔案內容加到游標所在行後面；
+>  > > >                              :q  離開 vi；
+>  > > >                              :q! 強制離開 vi ；
+>  > > >
+>  > > >                              其他指令：  
+>  > > >                              :set  nu  設定行號，讓你可以輕易的找出錯誤；
+>  > > >                              :set  nonu  取消設定行號；
+>  > > >                              :n1, n2  w  [filename]  將 n1 到 n2 的內容存成 『filename』 這個檔案；
+>  > > >                              ________________________________________
+>  > > >                              OK！會這些指令就已經很厲害了，因為常用到的指令也只有不到一半！通常 vi 的指令除了常用的幾個外，其他是不用背的，你可以做一張簡單的指令表在你的螢幕牆上，一有疑問可以馬上的查詢幽！
+>  > > >
+>  > > >
+>  > > >                              指令: 鳥哥的 Linux 私房菜
+>  > > >                              http://linux.vbird.org/linux_basic/0220filemanager.php#dir_name
+>  > > >                              1. 目錄與路徑
+>  > > >                              　　1.1 相對路徑與絕對路徑
+>  > > >                              　　1.2 目錄的相關操作： cd, pwd, mkdir, rmdir
+>  > > >                              　　1.3 關於執行檔路徑的變數： $PATH
+>  > > >                              2. 檔案與目錄管理
+>  > > >                              　　2.1 檔案與目錄的檢視： ls
+>  > > >                              　　2.2 複製、刪除與移動： cp, rm, mv
+>  > > >                              　　2.3 取得路徑的檔案名稱與目錄名稱
+>  > > >                              3. 檔案內容查閱：
+>  > > >                              　　3.1 直接檢視檔案內容： cat, tac, nl
+>  > > >                              　　3.2 可翻頁檢視： more, less
+>  > > >                              　　3.3 資料擷取： head, tail
+>  > > >                              　　3.4 非純文字檔： od
+>  > > >                              　　3.5 修改檔案時間與建置新檔： touch
+>  > > >                              4. 檔案與目錄的預設權限與隱藏權限
+>  > > >                              　　4.1 檔案預設權限：umask
+>  > > >                              　　4.2 檔案隱藏屬性： chattr, lsattr
+>  > > >                              　　4.4 檔案特殊權限：SUID, SGID, SBIT, 權限設定
+>  > > >                              　　4.3 觀察檔案類型：file
+>  > > >                              5. 指令與檔案的搜尋：
+>  > > >                              　　5.1 指令檔名的搜尋
+>  > > >                                  5.2 檔案檔名的搜尋：whereis, locate, find
+
+
