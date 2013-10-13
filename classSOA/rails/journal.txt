@@ -1,0 +1,162 @@
+10/10 課本4.2
+Migrations（資料庫遷移）
+Migrations（資料庫遷移）可以讓你用 Ruby 程式來修改資料庫結構。相較於直接進資料庫系統使用 SQL 修改結構(例如使用 phpMyAdmin 工具來修改)，使用 Migrations 可以讓我們有記錄地進行資料庫修改，每次變更就是一筆 Migration 記錄。在沒有 Migration 之前，如果你手動修改了資料庫，那麼你就必須通知其他開發者也進行一樣的修改步驟。另外，在正式佈署的伺服器上，你也必須追蹤並執行同樣的變更才行。而這些步驟如果沒有記錄下來，就很容易出錯。
+Migrations 會自動追蹤哪些變更已經執行過了、那些還沒有，你只要新增 Migration 檔案，然後執行 rake db:migrate 就搞定了。它會自己搞清楚該跑哪些 migrations，如此所有的開發者和正式佈署的伺服器上，就可以輕易的同步最新的資料庫結構。另外一個優點是： Migration 是獨立於資料庫系統的，所以你不需要煩惱各種資料庫系統的語法差異，像是不同型態之類的。當然，如果要針對某個特定資料庫系統撰寫專屬功能的話，還是可以透過直接寫 SQL 的方式。
+http://ihower.tw/rails3/firststep.html 建立rails的步驟
+
+這個目錄下包含了一個Rails專案基本會用到的目錄結構和檔案，讓我們簡單走訪一下，輸入ls(Windows讀者請輸入dir)顯示出此目錄下的檔案：
+檔案/目錄	用途
+Gemfile	設定Rails應用程式會使用哪些Gems套件
+README	專案說明：你可以用來告訴其他人你的應用程式是做什麼用的，如何使用等等。
+Rakefile	用來載入可以被命令列執行的一些Rake任務
+app/	放Controllers、Models和Views檔案，接下來的內容主要都在這個目錄。
+config/	應用程式設定檔、路由規則、資料庫設定等等
+config.ru	用來啟動應用程式的Rack伺服器設定檔
+db/	資料庫的結構綱要
+doc/	用來放你的文件
+lib/	放一些自定的Module和類別檔案
+log/	應用程式的Log記錄檔
+public/	唯一可以在網路上看到的目錄，這是你的圖檔、JavaScript、CSS和其他靜態檔案擺放的地方
+script/	放rails這個指令和放其他的script指令
+test/	單元測試、fixtures及整合測試等程式
+tmp/	暫時性的檔案
+vendor/	用來放第三方程式碼外掛的目錄
+
+啟動伺服器
+Rails使用了一套叫做Bundler的工具可以幫助我們檢查及安裝這個Rails應用程式所有依存的套件，請輸入：
+$ bundle install
+可以只輸入bundle就是bundle install了。 
+
+每次有修改Gemfile這個檔案，都需要重新執行bundle
+
+設定首頁
+如何將網站首頁變更為welcome#index呢? 首先，我們將public/index.html這個檔案移除，這是因為Rails會優先回傳任何public目錄下的靜態檔案。接著編輯config/routes.rb打開以下的程式碼：
+root :to => "welcome#index"
+Ruby的單行註解是用#井號
+這一行的意思是，將網站根目錄導引至welcome Controller的index Action。那在View中要怎麼建立回首頁的連結呢？編輯app/views/welcome/say.html.erb加入：
+<p><%= link_to "Home", root_path %></p>
+設定及建立資料庫
+操作資料庫是動態網站非常基本的功能，在撰寫CRUD應用程式之前，我們必須先設定好資料庫。Rails的資料庫設定檔是config/database.yml，如果你打開這個檔案，預設的設定是SQLite3。這個檔案裡包含三段不同環境的設定，對應到三個Rails執行環境：
+•	development 開發模式，用在你的開發的時候
+•	test 測試模式，用在執行自動測試時
+•	production 正式上線模式，用在實際的上線運作環境
+
+
+
+資料庫
+因此有經驗的Rails程式設計師甚少使用預設的鷹架產生程式碼，而是偏好使用Rails的generator來分別產生Model和Controller檔案，甚至客製出自己專屬的scaffold程式。
+scaffold產生出來的程式中，有一項是資料庫遷移檔(database migration)。Migration的用途是建立和修改資料庫資料表。Rails使用rake指令來執行Migrations。Migration的檔名中包含了Timestamp(時間戳章)，用來確保它們可以依照建立時間依序執行。
+
+Migration 超好用網站http://ihower.tw/rails3/migrations.html 
+新增一個 Migration 檔案
+執行以下指令，就會在 db/migrate/ 目錄下產生如 20110203070100_migration_name.rb 的檔案
+rails g migration migration_name
+
+讓我們打開這個檔案看看：
+class MigrationName < ActiveRecord::Migration
+  def up
+  end
+
+  def down
+  end
+end
+在這個類別中，包含了兩個類別方法分別是 up 和 down。其中 up 會在執行這個 migration 時執行，反之 down 會在滾回(Roll back)這個 Migration 時執行。例如，我們在 up 時新增一個資料庫表格(table)，那麼就可以在 down 的時候把這個table刪除。
+Migration 可用的方法
+
+在up或down方法裡，我們有以下方法可以使用：
+
+對資料表做修改:
+
+create_table(name, options) 新增資料表
+drop_table(name) 移除資料表
+rename_table(old_name, new_name) 修改資料表名稱
+change_table 修改資料表欄位
+個別修改資料表欄位:
+
+add_column(table, column, type, options) 新增一個欄位
+rename_column(table, old_column_name, new_column_name) 修改欄位名稱
+change_column(table, column, type, options) 修改欄位的型態(type)
+remove_column(table , column) 移除欄位
+新增、移除索引:
+
+add_index(table, columns, options) 新增索引
+remove_index(table, index) 移除索引
+
+
+課本 4-2 
+ActiveRecord 
+http://ihower.tw/rails3/activerecord.html
+
+ActiveRecord 是 Rails 的 ORM 元件，負責與資料庫溝通，讓我們可以用物件導向的語法操作資料庫。在”打造 CRUD 應用程式”一章中提到的對應概念如下：
+•	將資料庫表格(table) 對應到一個類別(class)
+•	類別方法就是操作表格(table)
+•	將資料庫一列 (row) 對應到一個物件(object)
+•	物件方法就是操作個別的資料(row)
+•	將資料庫欄位(column) 對應到物件的屬性(object attribute)
+
+因此，資料庫裡面的資料表，我們用一個 Model 類別來表示，而其中的一筆資料，就是一個 Model 物件。
+建立 Model
+首先，讓我們示範如何建立一個 Model：
+rails g model category
+這個指令會產生幾個檔案
+category.rb
+category_test.rb
+categories.yml
+xxxxxxxx_create_categories.rb
+打開 xxxxxxxx_create_categories.rb 你可以看到資料表的定義，讓我們加上幾個欄位吧，除了建立categiries表，同時也幫events加上一個外部鍵讓兩個表可以關連起來，在後幾章會用到：
+class CreateCategories < ActiveRecord::Migration
+  def change
+    create_table :categories do |t|
+      t.string :name
+      t.integer :position
+      t.timestamps
+    end
+    
+    add_column :events, :category_id, :integer
+    add_index :events, :category_id
+  end
+end
+接著執行以下指令便會產生出資料庫資料表
+bundle exec rake db:migrate
+db:migrate 指令會將上述的 Ruby 程式變成以下 SQL 執行。
+CREATE TABLE categories (
+"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"name" varchar(255) DEFAULT NULL,
+"position" int(4) DEFAULT NULL,
+"created_at" datetime DEFAULT NULL,
+"updated_at" datetime DEFAULT NULL);    
+接著我們打開 category.rb 你可以看到
+class Category < ActiveRecord::Base
+end
+這是一個繼承 ActiveRecord::Base 的 Category 類別。
+我們在學習 Ruby 的時候提過 irb 這個互動工具，而 Rails 也提供了特殊的 irb 介面叫做 console，讓我們可以直接與 Rails 程式互動：
+rails console (可以簡寫成 rails c)
+透過 console，我們可以輕易的練習操作 ActiveRecord。
+
+如果想離開irb，可以輸入exit。
+觀看 Log
+不像 rails server 可以直接看到 log，在 Rails 主控台下必須透過觀察 log 檔案。我們可以透過 log 觀察到 Rails 產生出來的 SQL 長的如何。
+tail -f log/development.log
+Windows 上沒有這個指令，可以安裝 Tail for Win32 這個工具來即時觀察 log 檔案。或是安裝 GNU utilities for Win32 來獲得 tail 指令。
+
+
+
+
+出現 ActiveModel::MassAssignmentSecurity::Error 錯誤？
+Rails 3.2.8 之後的 3.2.X 版本預設將 config/application.rb 的 config.active_record.whitelist_attributes 設定改成 true，讓大量賦值(Mass assignment)功能失效(詳見安全性一章)，造成範例中如 l = Location.new( :event => e ) 出現 ActiveModel::MassAssignmentSecurity::Error: Can't mass-assign protected attributes: event 的錯誤。解決方式有 1. 修改 config/application.rb 的 config.active_record.whitelist_attributes 設定為 false 2. 或是分開賦值 l=Location.new; l.event = e
+Rails 4 之後又沒這個問題了，該 config.active_record.whitelist_attributes 設定被移除，預設改回允許大量賦值(Mass assignment)，所以本書範例就不做修正了。
+
+•	rake db:seed 執行 db/seeds.rb 載入種子資料
+種子資料 Seed
+種子資料Seed的意思是，有一些資料是應用程式跑起來必要基本資料，而這些資料的產生我們會放在db/seeds.rb這個檔案。例如，讓我們打開來，加入一些基本的Category資料：
+•	輸入rake db:seed就會執行這個檔案了。通常執行的時機是第一次建立好資料庫和跑完Migration之後。
+
+
+Rake routes   ???????
+
+這是用來觀察，你的 rails 專案中，有哪些 routes 可以用。
+如果設定 routes.rb 一直搞不定，就下這個指令來觀察吧！
+擴充Template Handler
+Rails預設只有內建ERb和Builder這兩套樣板引擎，但要擴充非常容易。例如在Rails社群中，也很流行用HAML這套樣板引擎來取代ERb。HAML是一套利用縮排技術簡化HTML撰寫的格式
+
+
