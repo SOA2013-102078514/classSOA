@@ -7,9 +7,6 @@ class Movie < ActiveRecord::Base
       map(&:capitalize).join(' ')
   end
 
-# now try in console:
-m = Movie.create!(:title => 'STAR  wars', :release_date => '27-5-1977')
-m.title  # => "Star Wars"
 
   def self.all_ratings ; %w[G PG PG-13 R NC-17] ; end #  shortcut: array of strings
   validates :title, :presence => true
@@ -27,14 +24,5 @@ end
 
 
 
-# try in console:
-m = Movie.new(:title => '', :rating => 'RG', :release_date => '1929-01-01')
-# force validation checks to be performed:
-m.valid?  # => false
-m.errors[:title] # => ["can't be blank"]
-m.errors[:rating] # => ["is not included in the list"]
-m.errors[:release_date] # => ["must be 1930 or later"]
-m.errors.full_messages # => ["Title can't be blank", "Rating is not
-  included in the list", "Release date must be 1930 or later"]
 
 

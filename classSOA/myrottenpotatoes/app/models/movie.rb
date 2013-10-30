@@ -7,9 +7,6 @@ class Movie < ActiveRecord::Base
       map(&:capitalize).join(' ')
   end
 
-# now try in console:
-m = Movie.create!(:title => 'STAR  wars', :release_date => '27-5-1977')
-m.title  # => "Star Wars"
 
   def self.all_ratings ; %w[G PG PG-13 R NC-17] ; end #  shortcut: array of strings
   validates :title, :presence => true
@@ -23,6 +20,7 @@ m.title  # => "Star Wars"
   end
   @@grandfathered_date = Date.parse('1 Nov 1968')
   def grandfathered? ; self.release_date >= @@grandfathered_date ; end
+
 end
 
 

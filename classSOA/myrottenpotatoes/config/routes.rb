@@ -1,5 +1,7 @@
 Myrottenpotatoes::Application.routes.draw do
 
+  devise_for :moviegoers, :controllers => { :omniauth_callbacks => "moviegoers/omniauth_callbacks" }
+
   resources :movies
   root :to => redirect('/movies')
   # The priority is based upon order of creation:
