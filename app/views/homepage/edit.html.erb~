@@ -1,0 +1,11 @@
+<h1>Exchange For Good</h1>
+<%= form_for @event, :url => {:action => 'update', :id => @event } do |f| %>
+Title: </br>
+    <%= f.text_field :title %>
+</br></br>
+Discription: </br>
+    <%= f.text_area :discription %>
+
+    <%= f.submit "Update" %>
+</br></br>
+<% end %>

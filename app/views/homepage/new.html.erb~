@@ -1,0 +1,19 @@
+<h1>Exchange For Good</h1>
+<%= form_for @events, :url => { :controller => 'homepage', :action => 'create' } do |f| %>
+Product name : 
+<%= f.text_field :title %> </br></br>
+Category: <select size=1 name="cat"> </br></br>
+<option value="clothes" selected> clothes
+<option value="shoes"> shoes
+<option value="3C"> 3C
+</select></br></br>
+Product condition: <input type=radio value="condition" name="condition"> new <input type=radio value="condition" name="condition"> pre-owned</br></br>
+Upload picture<input type=file value="upload"></br></br>
+Discription:</br>
+ <%= f.text_area :discription, size: "55x10" %> </br></br>
+How to get it:</br>
+<input type=radio value="對應值一" name="howtoget"> One day volunteer in elementary school</br>
+<input type=radio value="對應值二" name="howtoget"> Join the beach clean activity in 12/30</br>
+<input type=radio value="對應值三" name="howtoget"> Donate 1000$ NTD for charity</br></br>
+<input type=submit value="submit">
+<% end %>
