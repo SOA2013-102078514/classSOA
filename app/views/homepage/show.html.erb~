@@ -1,6 +1,6 @@
-<h1>Exchange For Good</h1>
+<h1>Exchange For Good_show</h1>
 <%= @event.title %>
 <%= simple_format(@event.discription) %>
 <p><%= link_to 'Edit',:action => 'edit' %></p>
-<p><%= link_to 'Delete',:action => 'destroy', :method => :delete, :id=>@event.id %></p>
+<p><%= link_to 'Delete',homepage_path(@event.id), :method => :delete %></p>
 <p><%= link_to 'Back to index',:action => 'index' %></p>
