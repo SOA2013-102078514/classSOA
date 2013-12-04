@@ -1,9 +1,9 @@
 ExchangeForGood::Application.routes.draw do
   
+  devise_for :users
+
   root :to => "homepage#index"
-  get "index" => "homepage#index"
-  get "uploadproducts" => "homepage#new"
-  #get "upload/show/:id" => "homepage#show"
+
   resources :homepage
   # The priority is based upon order of creation:
   # first created -> highest priority.

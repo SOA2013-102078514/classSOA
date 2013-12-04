@@ -35,7 +35,6 @@ class HomepageController < ApplicationController
   def destroy
   @event = Uploadproduct.find(params[:id])
   @event.destroy
-
   redirect_to :action => :index
   end
 
