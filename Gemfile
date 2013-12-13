@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
-
+gem "kaminari"
 gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:

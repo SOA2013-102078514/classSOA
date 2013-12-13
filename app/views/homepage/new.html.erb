@@ -1,5 +1,13 @@
 <h1>Exchange For Good_New</h1>
-<%= form_for @events, :url => { :controller => 'homepage', :action => 'create' } do |f| %>
+<%= form_for @event, :url => { :controller => 'homepage', :action => 'create' } do |f| %>
+<% if @event.errors.any? %>
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+      <li style="color: red"><%= msg %></li>
+      <% end %>
+      </ul>
+<% end %>
+
 Product name : 
 <%= f.text_field :title %> </br></br>
 Category: <select size=1 name="cat"> </br></br>
@@ -8,12 +16,17 @@ Category: <select size=1 name="cat"> </br></br>
 <option value="3C"> 3C
 </select></br></br>
 Product condition: <input type=radio value="condition" name="condition"> new <input type=radio value="condition" name="condition"> pre-owned</br></br>
+
+
 Upload picture<input type=file value="upload"></br></br>
+
+
 Discription:</br>
  <%= f.text_area :discription, size: "55x10" %> </br></br>
 How to get it:</br>
 <input type=radio value="對應值一" name="howtoget"> One day volunteer in elementary school</br>
 <input type=radio value="對應值二" name="howtoget"> Join the beach clean activity in 12/30</br>
 <input type=radio value="對應值三" name="howtoget"> Donate 1000$ NTD for charity</br></br>
+<%= f.hidden_field :user_id, :value=>current_user.id %>
 <%= f.submit "Submit" %>
 <% end %>

@@ -17,6 +17,8 @@
     <%= link_to('登入', new_session_path(:user)) %>
   <% end%>
 
+<p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:alert] %></p>
 <%= yield %>
 
 </body>

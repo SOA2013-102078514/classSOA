@@ -1,4 +1,4 @@
-<h1>Exchange For Good</h1>
+<h1>Exchange For Good_Edit</h1>
 <%= form_for @event, :url => {:action => 'update', :id => @event } do |f| %>
 Title: </br>
     <%= f.text_field :title %>

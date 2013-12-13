@@ -8,7 +8,16 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+  gem 'heroku'
+ 
+  group :development, :test do
+     gem 'debugger'
+     gem 'sqlite3' # use SQLite only in development and testing
+  end
+  group :production do
+     gem 'pg' # use PostgreSQL in production (Heroku)
+  end
+
 gem 'devise'
 
 # Gems used only for assets and not required

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20131204024812) do
     t.boolean  "condition"
     t.text     "discription"
     t.boolean  "thingstodo"
+    t.integer  "user_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

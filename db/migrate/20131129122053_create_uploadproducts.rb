@@ -7,6 +7,8 @@ class CreateUploadproducts < ActiveRecord::Migration
 	t.boolean :condition
 	t.text :discription
 	t.boolean :thingstodo
+        t.references :user
+
 
       t.timestamps
     end

@@ -2,21 +2,31 @@ class HomepageController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-  @events = Uploadproduct.all
+  @events = Uploadproduct.page(params[:page]).per(10)
+  respond_to do |format|
+    format.html # index.html.erb
+    format.xml { render :xml => @events.to_xml }
+    format.json { render :json => @events.to_json }
+    format.atom { @feed_title = "My event list" } # index.atom.builder
+  end
   end
 
   def new
-  @events = Uploadproduct.new
+  @event = Uploadproduct.new
   end
 
-  def create     
+def create
   @event = Uploadproduct.new(params[:uploadproduct])
-  @event.save
-  redirect_to :action => "index"
+   if @event.save
+    redirect_to :action => :index
+  else
+    render :action => :new
   end
+  flash[:notice] = "event was successfully created"
+
+end
 
   def show
-  @events = Uploadproduct.all
   @event = Uploadproduct.find(params[:id])
   end
 
@@ -28,15 +38,19 @@ class HomepageController < ApplicationController
 
   def update
   @event = Uploadproduct.find(params[:id])
-  @event.update_attributes(params[:uploadproduct])
-
-  redirect_to :action => :show, :id => @event
+  if @event.update_attributes(params[:uploadproduct])
+    redirect_to :action => :show, :id => @event
+  else
+    render :action => :edit
+  end
+  flash[:notice] = "event was successfully updated"
   end
 
   def destroy
   @event = Uploadproduct.find(params[:id])
   @event.destroy
   redirect_to :action => :index
+  flash[:alert] = "event was successfully deleted"
   end
 
 
