@@ -1,0 +1,6 @@
+<h1>Exchange For Good</h1>
+<%= paginate @events %>
+<p><%= button_to 'Upload products', new_homepage_path %></p>
+<% @events.each do |c| %>
+    <%= link_to "#{c.title}", :action => 'show', :id => "#{c.id}" %></br>
+<% end%>

@@ -1,0 +1,2 @@
+class UploadproductController < ApplicationController
+end

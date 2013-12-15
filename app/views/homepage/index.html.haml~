@@ -1,0 +1,13 @@
+-#  This file is app/views/homepage/index.html.haml
+%h1 All Movies
+
+%table#movies
+  %thead
+    %tr
+      %th Movie Title
+      %th Rating
+      %th Release Date
+      %th More Info
+-# add to end of index.html.haml
+
+
