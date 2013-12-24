@@ -1,6 +1,7 @@
 class Moviegoer < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+has_many :reviews
 devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
@@ -19,6 +20,7 @@ def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   end
   moviegoer
  end
+
  def self.new_with_session(params, session)
     super.tap do |moviegoer|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

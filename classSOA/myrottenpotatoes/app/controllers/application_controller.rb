@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
  #   @current_user ||= Moviegoer.find_by_id(session[:user_id])
  #   redirect_to login_path and return unless @current_user
  # end
-
+ protect_from_forgery
 
 # somewhat contrived example of an around-filter
 around_filter :only => ['withdraw_money', 'transfer_money'] do

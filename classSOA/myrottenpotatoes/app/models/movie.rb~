@@ -20,6 +20,7 @@ class Movie < ActiveRecord::Base
   end
   @@grandfathered_date = Date.parse('1 Nov 1968')
   def grandfathered? ; self.release_date >= @@grandfathered_date ; end
+
 end
 
 

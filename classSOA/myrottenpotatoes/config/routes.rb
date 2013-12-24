@@ -2,7 +2,16 @@ Myrottenpotatoes::Application.routes.draw do
 
   devise_for :moviegoers, :controllers => { :omniauth_callbacks => "moviegoers/omniauth_callbacks" }
 
-  resources :movies
+# add to routes.rb, just before or just after 'resources :movies' :
+ 
+# Route that posts 'Search TMDb' form
+  
+ resources :movies 
+#do
+  post '/movies/search_tmdb'
+  # resources :reviews
+#end
+  
   root :to => redirect('/movies')
   # The priority is based upon order of creation:
   # first created -> highest priority.
